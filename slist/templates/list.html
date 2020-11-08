@@ -1,0 +1,63 @@
+{%extends 'base.html'%}
+
+{%block title%}
+<title>Your List</title>
+{%endblock title%}
+
+{% block content%}
+<div class="container">
+    </br>
+    {%if messages%}
+    {%for message in messages%}
+    <div class="alert alert-success" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {%endfor%}
+    {%endif%}
+    </br>
+    <form method="POST">
+        {%csrf_token%}
+
+        {%if supermarkets%}
+        <select class="form-control form-control-lg" onchange="document.querySelector('form').submit()"">
+            <option value="">Selecciona :)</option>
+            {%for supermarket in supermarkets%}
+            <option value=" {{supermarket.id}}">{{supermarket.supermarket}}</option>
+            {%endfor%}
+        </select>
+        {%endif%}
+    </form>
+    </br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price</th>
+                <th scope="col">Want it?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%if all_products%}
+            {%for product in all_products%}
+            <tr>
+                <th scope="row">{{product}}</th>
+                <td>{{product.brand}}</td>
+                <td>{{product.category}}</td>
+                <td>{{form}}</td>
+                <td>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                </td>
+            </tr>
+            {%endfor%}
+            {%endif%}
+            </br>
+        </tbody>
+    </table>
+</div>
+{% endblock content%}

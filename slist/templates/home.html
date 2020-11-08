@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+
+{%block title%}
+<title>Edit</title>
+{%endblock title%}
+
+{% block content%}
+<div class="container">
+    </br>
+    {%if messages%}
+    {%for message in messages%}
+    <div class="alert alert-success" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {%endfor%}
+    {%endif%}
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Category</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%if all_products%}
+            {%for product in all_products%}
+            <tr>
+                <th scope="row">{{product}}</th>
+                <td>{{product.brand}}</td>
+                <td>{{product.category}}</td>
+                <td><a href="{% url 'delete' product.id%}">Bye!</a></td>
+            </tr>
+            {%endfor%}
+            {%endif%}
+        </tbody>
+    </table>
+    </br>
+    <form method="POST">
+        {%csrf_token%}
+        <div class="form-group">
+            <label>Want to add a product?</label>
+            <input type="text" class="form-control" name="product">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock content%}
