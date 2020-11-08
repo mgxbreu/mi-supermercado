@@ -22,42 +22,43 @@
         {%csrf_token%}
 
         {%if supermarkets%}
-        <select class="form-control form-control-lg" onchange="document.querySelector('form').submit()"">
+        <select name='supermarket' class="form-control form-control-lg"
+            onchange="document.querySelector('form').submit()"">
             <option value="">Selecciona :)</option>
             {%for supermarket in supermarkets%}
-            <option value=" {{supermarket.id}}">{{supermarket.supermarket}}</option>
+            <option value='{{supermarket.id}}'>{{supermarket.supermarket}}</option>
             {%endfor%}
         </select>
         {%endif%}
     </form>
     </br>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Category</th>
-                <th scope="col">Price</th>
-                <th scope="col">Want it?</th>
-            </tr>
-        </thead>
-        <tbody>
-            {%if all_products%}
-            {%for product in all_products%}
-            <tr>
-                <th scope="row">{{product}}</th>
-                <td>{{product.brand}}</td>
-                <td>{{product.category}}</td>
-                <td>{{form}}</td>
-                <td>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                </td>
-            </tr>
-            {%endfor%}
-            {%endif%}
-            </br>
-        </tbody>
-    </table>
+    <table class=" table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Want it?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%if all_products%}
+                {%for product in all_products%}
+                <tr>
+                    <th scope="row">{{product}}</th>
+                    <td>{{product.brand}}</td>
+                    <td>{{product.category}}</td>
+                    <td>{{form}}</td>
+                    <td>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </td>
+                </tr>
+                {%endfor%}
+                {%endif%}
+                </br>
+            </tbody>
+            </table>
 </div>
 {% endblock content%}

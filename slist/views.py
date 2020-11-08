@@ -8,10 +8,15 @@ from django.contrib import messages
 
 def slist(request):
     supermarkets = Supermarket.objects.all()
-    all_products = Product.objects.all()
+    query_products = Product.objects.filter()
+
+    if request.POST:
+        supermarket_id = request.POST.get('supermarket')
+        query_products = Product.objects.filter(productbysupermarket__supermarket_id=supermarket_id)
+
     return render(request, 'list.html', {
         'supermarkets': supermarkets,
-        'all_products': all_products
+        'all_products': query_products
         }
     )
 

@@ -31,8 +31,6 @@ class Brand(models.Model):
 class Product(models.Model):
     product = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
-
 
     def __str__(self):
         return self.product
@@ -40,9 +38,10 @@ class Product(models.Model):
 
 class ProductBySupermarket(models.Model):
     price = models.IntegerField()
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
     supermarket = models.ForeignKey(
         Supermarket, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"${str(self.price)} | {self.product} | {self.supermarket} "
+        return f"${str(self.price)} | {self.product} | {self.supermarket} | {self.brand}"
